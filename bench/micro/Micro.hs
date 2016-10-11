@@ -21,7 +21,7 @@ import qualified Micro.Types     as Micro.Types ()
 import qualified Micro.ReadShow  as Micro.ReadShow
 import qualified Micro.PkgBinary as Micro.PkgBinary
 import qualified Micro.PkgCereal as Micro.PkgCereal
-import qualified Micro.PkgStore  as Micro.PkgStore
+--import qualified Micro.PkgStore  as Micro.PkgStore
 import qualified Micro.PkgAesonGeneric as Micro.PkgAesonGeneric
 import qualified Micro.PkgAesonTH as Micro.PkgAesonTH
 --import qualified Macro.PkgMsgpack as PkgMsgpack
@@ -42,7 +42,7 @@ benchmarks =
       , bench "aeson generic" (whnf perfEncodeAesonGeneric tstdata)
       , bench "aeson TH"      (whnf perfEncodeAesonTH      tstdata)
       , bench "read/show"     (whnf perfEncodeReadShow     tstdata)
-      , bench "store"         (whnf perfEncodeStore        tstdata)
+--    , bench "store"         (whnf perfEncodeStore        tstdata)
 --    , bench "msgpack lib"   (whnf perfEncodeMsgpack      tstdata)
 --    , bench "new msgpack"   (whnf perfEncodeNewMsgPack   tstdata)
       , bench "cbor"          (whnf perfEncodeCBOR         tstdata)
@@ -54,7 +54,7 @@ benchmarks =
       , bench "aeson generic" (whnf perfDecodeAesonGeneric tstdataA)
       , bench "aeson TH"      (whnf perfDecodeAesonTH      tstdataA)
       , bench "read/show"     (whnf perfDecodeReadShow     tstdataS)
-      , bench "store"         (whnf perfDecodeStore        tstdataP)
+--    , bench "store"         (whnf perfDecodeStore        tstdataP)
 --    , bench "msgpack lib"   (whnf perfDecodeMsgpack      tstdataM)
 --    , bench "new msgpack"   (whnf perfDecodeNewMsgPack   tstdataN)
       , bench "cbor"          (whnf perfDecodeCBOR         tstdataR)
@@ -66,7 +66,7 @@ benchmarks =
       , bench "aeson generic" (nf perfDecodeAesonGeneric tstdataA)
       , bench "aeson TH"      (nf perfDecodeAesonTH      tstdataA)
       , bench "read/show"     (nf perfDecodeReadShow     tstdataS)
-      , bench "store"         (nf perfDecodeStore        tstdataP)
+--    , bench "store"         (nf perfDecodeStore        tstdataP)
 --    , bench "msgpack lib"   (nf perfDecodeMsgpack      tstdataM)
 --    , bench "new msgpack"   (nf perfDecodeNewMsgPack   tstdataN)
       , bench "cbor"          (nf perfDecodeCBOR         tstdataR)
@@ -87,7 +87,7 @@ benchmarks =
     !tstdataS = combineChunks $ Micro.ReadShow.serialise tstdata
 --  !tstdataM = combineChunks $ PkgMsgpack.serialise tstdata
 --  !tstdataN = combineChunks $ Micro.NewMsgpack.serialise tstdata
-    !tstdataP = Micro.PkgStore.serialise tstdata
+--  !tstdataP = Micro.PkgStore.serialise tstdata
     !tstdataR = combineChunks $ Micro.CBOR.serialise tstdata
 
     -- Encoding tests
@@ -96,7 +96,7 @@ benchmarks =
     perfEncodeAesonGeneric = BS.length . Micro.PkgAesonGeneric.serialise
     perfEncodeAesonTH      = BS.length . Micro.PkgAesonTH.serialise
     perfEncodeReadShow     = BS.length . Micro.ReadShow.serialise
-    perfEncodeStore        = B.length  . Micro.PkgStore.serialise
+--  perfEncodeStore        = B.length  . Micro.PkgStore.serialise
 --  perfEncodeMsgpack      = BS.length . Micro.PkgMsgpack.serialise
 --  perfEncodeNewMsgPack   = BS.length . Micro.NewMsgpack.serialise
     perfEncodeCBOR         = BS.length . Micro.CBOR.serialise
@@ -107,7 +107,7 @@ benchmarks =
     perfDecodeAesonGeneric = Micro.PkgAesonGeneric.deserialise
     perfDecodeAesonTH      = Micro.PkgAesonTH.deserialise
     perfDecodeReadShow     = Micro.ReadShow.deserialise
-    perfDecodeStore        = Micro.PkgStore.deserialise
+--  perfDecodeStore        = Micro.PkgStore.deserialise
 --  perfDecodeMsgpack      = PkgMsgpack.deserialise
 --  perfDecodeNewMsgPack   = Micro.NewMsgpack.deserialise
     perfDecodeCBOR         = Micro.CBOR.deserialise

@@ -10,7 +10,7 @@ import qualified Data.ByteString.Lazy   as BS
 import           Macro.DeepSeq ()
 import qualified Macro.PkgBinary as PkgBinary
 import qualified Macro.PkgCereal as PkgCereal
-import qualified Macro.PkgStore  as PkgStore
+--import qualified Macro.PkgStore  as PkgStore
 import qualified Macro.CBOR as CBOR
 
 
@@ -25,10 +25,10 @@ benchmarks =
           [ envCereal $ \v ->
               bench "deserialise" $ nf PkgCereal.deserialise v
           ]
-      , bgroup "store"
-          [ envStore $ \v ->
-              bench "deserialise" $ nf PkgStore.deserialise v
-          ]
+--      , bgroup "store"
+--          [ envStore $ \v ->
+--              bench "deserialise" $ nf PkgStore.deserialise v
+--          ]
       , bgroup "cbor"
           [ envCBOR $ \v ->
               bench "deserialise" $ nf CBOR.deserialise v
@@ -53,7 +53,7 @@ benchmarks =
     -- Helpers for using Criterion environments.
     envBinary = env (fmap BS.fromStrict (readBin "binary"))
     envCereal = env (fmap BS.fromStrict (readBin "cereal"))
-    envStore  = env (readBin "store")
+--    envStore  = env (readBin "store")
     envCBOR   = env (fmap BS.fromStrict (readBin "cbor"))
 
     -- | Read one of the pre-encoded binary files out of the

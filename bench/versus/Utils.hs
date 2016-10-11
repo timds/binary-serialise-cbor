@@ -18,7 +18,7 @@ import           Macro.DeepSeq ()
 import qualified Macro.Load      as Load
 import qualified Macro.PkgBinary as PkgBinary
 import qualified Macro.PkgCereal as PkgCereal
-import qualified Macro.PkgStore  as PkgStore
+--import qualified Macro.PkgStore  as PkgStore
 import qualified Macro.CBOR      as CBOR
 
 --------------------------------------------------------------------------------
@@ -86,7 +86,7 @@ prepBenchmarkFiles = do
   write "binary.bin"     (PkgBinary.serialise _pkgs20k)
   write "cereal.bin"     (PkgCereal.serialise _pkgs20k)
   write "cbor.bin"       (CBOR.serialise      _pkgs20k)
-  writeS "store.bin"     (PkgStore.serialise  _pkgs20k)
+--writeS "store.bin"     (PkgStore.serialise  _pkgs20k)
 --write "cbor-small.bin" (CBOR.serialise      _pkgs1k)
 
   -- And before we finish: do a garbage collection to clean up anything left

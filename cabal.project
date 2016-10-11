@@ -1,4 +1,3 @@
-packages:
-  *.cabal
---benchmarks: True
---profiling: True
+packages: .
+benchmarks: True
+tests: True

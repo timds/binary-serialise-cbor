@@ -19,7 +19,7 @@ import qualified Macro.PkgBinary as PkgBinary
 import qualified Macro.PkgCereal as PkgCereal
 import qualified Macro.PkgAesonGeneric as PkgAesonGeneric
 import qualified Macro.PkgAesonTH as PkgAesonTH
-import qualified Macro.PkgStore as PkgStore
+--import qualified Macro.PkgStore as PkgStore
 
 --import qualified Macro.PkgMsgpack as PkgMsgpack
 import qualified Macro.CBOR as CBOR
@@ -49,7 +49,7 @@ benchmarks =
 --      , bench "msgpack lib"   (whnf perfEncodeMsgpack      tstdata)
 --      , bench "new msgpack"   (whnf perfEncodeNewMsgPack   tstdata)
       , bench "cbor"          (whnf perfEncodeCBOR         tstdata)
-      , bench "store"         (whnf perfEncodeStore        tstdata)
+--      , bench "store"         (whnf perfEncodeStore        tstdata)
       ]
 
   , env readBigTestData $ \tstdata ->
@@ -69,8 +69,8 @@ benchmarks =
 
 --      , env (return $ NewMsgpack.serialise tstdata) $ \tstdataN ->
 --        bench "new msgpack"   (whnf perfDecodeNewMsgPack   tstdataN)
-      , env (return $ PkgStore.serialise tstdata)
-        $ \tstdataR -> bench "store" (whnf perfDecodeStore tstdataR)
+--      , env (return $ PkgStore.serialise tstdata)
+--        $ \tstdataR -> bench "store" (whnf perfDecodeStore tstdataR)
       , env (return $ combineChunks $ CBOR.serialise tstdata)
         $ \tstdataR -> bench "cbor" (whnf perfDecodeCBOR tstdataR)
       ]
@@ -95,8 +95,8 @@ benchmarks =
 --      , env (return $ NewMsgpack.serialise tstdata) $ \tstdataN ->
 --        bench "new msgpack"   (nf perfDecodeNewMsgPack   tstdataN)
 
-      , env (return $ PkgStore.serialise tstdata)
-      $ \tstdataR -> bench "store" (nf perfDecodeStore tstdataR)
+--      , env (return $ PkgStore.serialise tstdata)
+--      $ \tstdataR -> bench "store" (nf perfDecodeStore tstdataR)
       , env (return $ combineChunks $ CBOR.serialise tstdata)
       $ \tstdataR -> bench "cbor" (nf perfDecodeCBOR tstdataR)
       ]
@@ -132,10 +132,10 @@ benchmarks =
     --perfDecodeNewMsgPack   = NewMsgpack.deserialise
     perfDecodeCBOR        = CBOR.deserialise
 
-    perfDecodeStore :: B.ByteString -> [Types.GenericPackageDescription]
-    perfDecodeStore = PkgStore.deserialise
-    perfEncodeStore :: [Types.GenericPackageDescription] -> Int
-    perfEncodeStore = B.length . PkgStore.serialise
+--    perfDecodeStore :: B.ByteString -> [Types.GenericPackageDescription]
+--    perfDecodeStore = PkgStore.deserialise
+--    perfEncodeStore :: [Types.GenericPackageDescription] -> Int
+--    perfEncodeStore = B.length . PkgStore.serialise
 
     -- Convert any lazy ByteString to ByteString lazy bytestring
     -- that have only single chunk.
